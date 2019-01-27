@@ -1,2 +1,3 @@
-# GetGoogleNews
-Google ニュースからタイトルとURLを取得する
+# GetGoogleNews-News
+
+- Google ニュースからタイトルとURLを取得する
