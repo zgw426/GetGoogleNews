@@ -42,6 +42,9 @@ def getInfoFromGoogleNews(argUrl):
             print(obj)
         print("********************************************************************")
 
+# http://www.google.co.jp/search?q=aws+site:https://aws.amazon.com/jp/blogs/news/&tbs=qdr:d
+# http://www.google.co.jp/search?hl=jp&gl=JP&num=10&q=aws&tbs=qdr:d
+        
 #url = 'https://news.google.com/?hl=ja&gl=JP&ceid=JP%3Aja'
 #getInfoFromGoogleNews( url )
 
