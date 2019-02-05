@@ -61,9 +61,10 @@ def getInfoFromGoogleSearch(argUrl):
     listNo = 1
 
     for item in tmplist:
+        print( listNo, " : ", item )
         outTitle=""
         outUrl=""
-        patn = 'href="/url?q=(.*html).*>(.*)</a>'
+        patn = 'href="/url?q=(http.*)".*>(.*)</a>'
         tmpinfo = re.search(patn , str( item ) )
         try:
             outTitle = tmpinfo.group(1)
@@ -78,3 +79,7 @@ def getInfoFromGoogleSearch(argUrl):
         for obj in news:
             print(obj)
         print("ーーー")
+
+
+url='http://www.google.co.jp/search?hl=ja&source=hp&q=aws&tbs=qdr:d'
+getInfoFromGoogleSearch( url )
