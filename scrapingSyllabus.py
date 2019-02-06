@@ -44,10 +44,8 @@ def getInfoFromGoogleNews(argUrl):
 
 # http://www.google.co.jp/search?q=aws+site:https://aws.amazon.com/jp/blogs/news/&tbs=qdr:d
 # http://www.google.co.jp/search?hl=jp&gl=JP&num=10&q=aws&tbs=qdr:d
-        
 #url = 'https://news.google.com/?hl=ja&gl=JP&ceid=JP%3Aja'
 #getInfoFromGoogleNews( url )
-
 
 ### rev.02
 
@@ -55,8 +53,8 @@ def getInfoFromGoogleSearch(argUrl):
     get_url_info = requests.get( argUrl )
     bs4Obj = bs4.BeautifulSoup(get_url_info.text, 'lxml')
     #print(bs4Obj)
-    tmplist = bs4Obj.select('a')
-    #print(tmplist)
+    tmplist = bs4Obj.select('div')
+    print(tmplist)
     newslist = [[]]
     listNo = 1
 
@@ -75,11 +73,10 @@ def getInfoFromGoogleSearch(argUrl):
             listNo += 1
         #newslist.append([tmpinfo.group(2),tmpinfo.group(1)])
         newslist.append([outUrl,outTitle])
-    for news in newslist:
-        for obj in news:
-            print(obj)
-        print("ーーー")
-
+    #for news in newslist:
+        #for obj in news:
+            #print(obj)
+        #print("ーーー")
 
 url='http://www.google.co.jp/search?hl=ja&source=hp&q=aws&tbs=qdr:d'
 getInfoFromGoogleSearch( url )
