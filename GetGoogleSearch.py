@@ -1,6 +1,6 @@
 # https://tanuhack.com/python/google-scraping/
 
-#C:\Users\crt02621\Data\python>python GetGoogleSearch.py
+#C:>python GetGoogleSearch.py
 #Traceback (most recent call last):
 #  File "C:\Users\crt02621\AppData\Local\Programs\Python\Python37\lib\site-packages\lxml\cssselect.py", line 13, in <module>
 #    import cssselect as external_cssselect
@@ -23,9 +23,6 @@ import re
 import json
 import requests as rq
 import lxml.html as lx
-
-#search_query = "実証&tbs=qdr:d"
-#requestsのget関数を使用して、Googleの検索結果画面(10位まで)の情報を抜き出す
 
 urlList=[]
 qryList = []
