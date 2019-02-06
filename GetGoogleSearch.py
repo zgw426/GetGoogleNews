@@ -1,3 +1,5 @@
+# https://tanuhack.com/python/google-scraping/
+
 #C:\Users\crt02621\Data\python>python GetGoogleSearch.py
 #Traceback (most recent call last):
 #  File "C:\Users\crt02621\AppData\Local\Programs\Python\Python37\lib\site-packages\lxml\cssselect.py", line 13, in <module>
