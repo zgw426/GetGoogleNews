@@ -24,7 +24,7 @@ import json
 import requests as rq
 import lxml.html as lx
 
-urlList=[]
+urlList01=[]
 qryList = []
 #qryList.append("実証&tbs=qdr:d")
 qryList.append("IoT AWS&tbs=qdr:d")
@@ -36,12 +36,13 @@ for search_query in qryList:
     html = r.text.encode()		#コンテンツをエンコードする
     root = lx.fromstring(html)	#パース（lxmlでスクレイピングする準備をする）
     for a in root.cssselect('div#search h3.r a'):
-        urlList.append( re.sub(r'/url\?q=|&sa.*', '',a.get('href')) )
+        urlList01.append( re.sub(r'/url\?q=|&sa.*', '',a.get('href')) )
 
-for url in urlList:
+urlList02=[]
+for url in urlList01:
     try:
-        print("ーーーーーーーーーーーーーーーーーー")
-        print(url)
+        #print("ーーーーーーーーーーーーーーーーーー")
+        #print(url)
         search = rq.get( url )
         search_html = search.text.encode(search.encoding)
         if(search.encoding=='utf-8' or search.encoding=='UTF-8'):
@@ -57,7 +58,7 @@ for url in urlList:
                 title = item
             else:
                 title = title + ', ' +item
-        print("title: ", title)
+        #print("title: ", title)
         list_description = []
         for a in search_root.cssselect('meta[name="description"]'):
             list_description.append(a.get('content'))     
@@ -67,7 +68,7 @@ for url in urlList:
                 description = item
             else:
                 description = description + ', ' +item
-        print("description: ", description)
+        #print("description: ", description)
         list_keywords = []
         for a in search_root.cssselect('meta[name="keywords"]'):
             list_keywords.append(a.get('content'))     
@@ -77,7 +78,11 @@ for url in urlList:
                 keywords = item
             else:
                 keywords = keywords + ', ' +item
-        print("keywords: ", keywords)
-
+        #print("keywords: ", keywords)
+        urlList02.append( [url, title, description, keywords] )
     except:
             print('読み取り不可')
+
+urlList03 = []
+for tgt in urlList02:
+    print(tgt)
