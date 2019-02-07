@@ -29,7 +29,7 @@ urlList01=[]
 qryList = []
 #qryList.append("実証&tbs=qdr:d")
 qryList.append("IoT AWS&tbs=qdr:d")
-qryList.append("AR&tbs=qdr:d")
+#qryList.append("AR&tbs=qdr:d")
 qryList.append("JavaScript&tbs=qdr:d")
 
 for search_query in qryList:
@@ -53,7 +53,7 @@ for url in urlList01:
             search_root = lx.fromstring(search_html)        
         list_title = []
         for a in search_root.cssselect('title'):
-            list_title.append(a.text)     
+            list_title.append(a.text)
         title=''
         for index,item in enumerate(list_title):
             if index==0:
@@ -61,9 +61,15 @@ for url in urlList01:
             else:
                 title = title + ', ' +item
 
-        pattern = '[Page Not Found|Too Many Requests]'
+        pattern = '(?!(Page Not Found|Too Many Requests|Error report))'
         result = re.match(pattern, title)
-        print(result)
+        if result:
+            print("1 : ", result)
+            addFlg = 1
+        else:
+            print("2 : ", result)
+            addFlg = 0
+        #print("result = ", result)
         """
         if title == "Page Not Found":
             addFlg = 0
@@ -98,12 +104,12 @@ for url in urlList01:
 
 urlList03 = []
 
-"""
+#"""
 for tgt in urlList02:
     print("^^^^^^^^^^^^^^^^^^^^^^^^^^^")
     print("title", tgt[1] , "\n", "description", tgt[2], "\n", tgt[3], "\n", tgt[0])
     print("____________________________")
-"""
+#"""
 """
 for tgt in urlList02:
     col = 0
