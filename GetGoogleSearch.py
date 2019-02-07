@@ -23,6 +23,7 @@ import re
 import json
 import requests as rq
 import lxml.html as lx
+from janome.tokenizer import Tokenizer
 
 urlList01=[]
 qryList = []
@@ -41,6 +42,7 @@ for search_query in qryList:
 urlList02=[]
 for url in urlList01:
     try:
+        addFlg = 1
         #print("ーーーーーーーーーーーーーーーーーー")
         #print(url)
         search = rq.get( url )
@@ -58,6 +60,16 @@ for url in urlList01:
                 title = item
             else:
                 title = title + ', ' +item
+
+        pattern = '[Page Not Found|Too Many Requests]'
+        result = re.match(pattern, title)
+        print(result)
+        """
+        if title == "Page Not Found":
+            addFlg = 0
+        if title == "Too Many Requests":
+            addFlg = 0
+        """
         #print("title: ", title)
         list_description = []
         for a in search_root.cssselect('meta[name="description"]'):
@@ -79,10 +91,34 @@ for url in urlList01:
             else:
                 keywords = keywords + ', ' +item
         #print("keywords: ", keywords)
-        urlList02.append( [url, title, description, keywords] )
+        if addFlg == 1:
+            urlList02.append( [url, title, description, keywords] )
     except:
             print('読み取り不可')
 
 urlList03 = []
+
+"""
 for tgt in urlList02:
-    print(tgt)
+    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+    print("title", tgt[1] , "\n", "description", tgt[2], "\n", tgt[3], "\n", tgt[0])
+    print("____________________________")
+"""
+"""
+for tgt in urlList02:
+    col = 0
+    data = []
+    each_data = []
+    t = Tokenizer()
+    tmpStr = tgt[1]+" "+tgt[2]+" "+tgt[3]
+    tokens = t.tokenize( tmpStr )
+    for token in tokens:
+        partOfSpeech = token.part_of_speech.split(',')[0]
+        each_data.append(token.surface)
+    data.append(each_data)
+    each_data = []
+    datastr = map(str, data[0])
+    s1 = " "
+    wStr = s1.join(datastr)
+    print( wStr )
+"""
